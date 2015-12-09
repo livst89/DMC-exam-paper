@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style}[2015/04/21 Report style package]
+
+% Colors
+\RequirePackage[usenames,dvipsnames]{xcolor} % MUST be before pdfpages package!
+
+% Import
+\RequirePackage{import}
+\RequirePackage{pdfpages}
+
+% Bibliography styling
+\RequirePackage[backend=biber, style=apa, citestyle=apa, sorting=nyt]{biblatex}
+\addbibresource{refs.bib}
+\RequirePackage[english]{babel}
+\DeclareLanguageMapping{english}{english-apa}
+\RequirePackage{csquotes}
+\addto\captionsenglish{% Replace "english" with the language you use
+  \renewcommand{\contentsname}%
+    {Table of Contents}%
+}
+
+% Graphics
+\RequirePackage{graphicx}
+\RequirePackage{subcaption}
+\RequirePackage{wrapfig}
+\newlength\savedintextsep % For saving the top vertical spacing for figures
+\setlength{\savedintextsep}{\intextsep}
+\newlength\savedbelowcaptionskip % For saving the bottom vertical spacing for figures
+\setlength{\savedbelowcaptionskip}{\belowcaptionskip}
+
+% Page layout (margins, headers, footers)
+\RequirePackage[a4paper, margin=2.5cm]{geometry} %width=150mm,top=25mm,bottom=25mm
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE]{RECONSTRUCTING COLOUR WITH LIGHT}
+\fancyhead[RO]{\leftmark}
+\fancyfoot{}
+\fancyfoot[LE,RO]{\thepage}
+
+% Changing page numbering on Chapter pages
+\fancypagestyle{plain}{
+\fancyhf{} % clear all header and footer fields
+\fancyfoot[LE,RO]{\thepage} % except page number
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+% Chapter customisation
+\RequirePackage[T1]{fontenc}
+\RequirePackage{titlesec, blindtext, color}
+\definecolor{aaublue}{RGB}{0,147,208}
+\newcommand{\hsp}{\hspace{20pt}}
+\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{aaublue}{|}\hsp}{0pt}{\Huge\bfseries}
+
+% Typography
+\setlength{\parindent}{0em} % No paragraph indentation!
+\RequirePackage{setspace}
+%\onehalfspacing % 1.5 line spacing
+\renewcommand{\baselinestretch}{1.5}
+
+% Quotes
+\newcommand{\source}[1]{%
+    \par\nobreak\parbox[t]{\linewidth}{\raggedleft #1}% Placing a quote source
+}
+
+% Image borders
+\setlength{\fboxsep}{0pt}
+\setlength{\fboxrule}{0.5pt}
+
+% Maths
+\RequirePackage{amsmath}
+
+% Tight lists
+\RequirePackage{mdwlist} % use {itemize*}, {enumerate*} and {description*}
+
+% Todo notes
+\RequirePackage[colorinlistoftodos]{todonotes}
+
+% Overfull boxes marking
+%\overfullrule=4cm
